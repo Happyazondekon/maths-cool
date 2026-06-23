@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="ad.size" content="width=320,height=480">
+<title>MathsCool Interstitiel 320x480 — FR</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:320px; height:480px; overflow:hidden;
+  font-family:'Arial Rounded MT Bold','Trebuchet MS',Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+#ad {
+  position:relative; width:320px; height:480px; overflow:hidden;
+  background:linear-gradient(155deg, #0D47A1 0%, #1565E8 45%, #1E88E5 75%, #42A5F5 100%);
+}
+
+/* ─── BG DECO ─── */
+.orb { position:absolute; border-radius:50%; pointer-events:none; }
+.orb.o1 { width:200px; height:200px; background:rgba(255,255,255,.06); top:-70px; right:-60px; }
+.orb.o2 { width:140px; height:140px; background:rgba(255,201,60,.08); bottom:-50px; left:-40px; }
+.msym { position:absolute; font-weight:900; color:rgba(255,255,255,.09); pointer-events:none; }
+.msym.s1 { font-size:50px; top:10px; left:6px; }
+.msym.s2 { font-size:32px; top:85px; right:10px; }
+.msym.s3 { font-size:30px; bottom:130px; left:14px; }
+.msym.s4 { font-size:40px; bottom:46px; right:12px; }
+
+/* ─── SKIP BUTTON ─── */
+#skip {
+  position:absolute; top:10px; right:10px; z-index:200;
+  background:rgba(0,0,0,.4); color:rgba(255,255,255,.9);
+  font-size:10.5px; font-weight:700; padding:5px 11px;
+  border-radius:16px; cursor:pointer;
+  opacity:0; pointer-events:none; transition:opacity .4s;
+  border:1px solid rgba(255,255,255,.2);
+}
+#skip.show { opacity:1; pointer-events:all; }
+
+/* ─── SCENE BASE ─── */
+.sc {
+  position:absolute; top:0; left:0; width:320px; height:480px;
+  opacity:0; pointer-events:none; transition:opacity .5s;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.sc.on { opacity:1; pointer-events:all; }
+
+/* ════════════════════════════════
+   SCENE 0 — INTRO
+════════════════════════════════ */
+#s0 { gap:14px; padding:30px 24px; }
+
+#s0Logo {
+  width:100px; height:100px; object-fit:contain;
+  animation:bnc .85s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes bnc {
+  0%   { transform:translateY(60px) scale(.4); opacity:0; }
+  55%  { transform:translateY(-14px) scale(1.1); opacity:1; }
+  75%  { transform:translateY(6px) scale(.97); }
+  100% { transform:translateY(0) scale(1); opacity:1; }
+}
+#s0Brand {
+  color:#fff; font-size:38px; font-weight:900; letter-spacing:.4px;
+  text-shadow:0 2px 10px rgba(0,0,0,.35);
+  animation:fup .6s .35s both;
+}
+#s0Stars { font-size:22px; animation:fup .6s .5s both; }
+#s0Sub {
+  color:rgba(255,255,255,.88); font-size:14px; font-weight:700;
+  text-align:center; line-height:1.5;
+  animation:fup .6s .65s both;
+}
+@keyframes fup {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ════════════════════════════════
+   SCENE 1 — CAROUSEL DE FEATURES
+════════════════════════════════ */
+#s1 { justify-content:flex-start; }
+
+#cvp { width:320px; height:448px; overflow:hidden; flex-shrink:0; }
+#ctrk {
+  display:flex; width:960px; height:448px;
+  transition:transform .45s cubic-bezier(.4,0,.2,1);
+}
+.csl {
+  width:320px; height:448px; flex-shrink:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px; padding:20px 16px 8px;
+}
+.csl img {
+  max-width:264px; max-height:324px;
+  width:auto; height:auto; object-fit:contain;
+  border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+.cap {
+  color:#fff; font-size:13px; font-weight:800;
+  text-align:center; line-height:1.35;
+  text-shadow:0 1px 4px rgba(0,0,0,.3);
+}
+#cdots {
+  height:32px; display:flex; align-items:center;
+  justify-content:center; gap:8px; flex-shrink:0;
+}
+.dot {
+  width:8px; height:8px; border-radius:50%;
+  background:rgba(255,255,255,.3);
+  transition:background .3s, transform .3s;
+}
+.dot.on { background:#FFC93C; transform:scale(1.3); }
+
+/* ════════════════════════════════
+   SCENE 2 — MINI QUIZ
+════════════════════════════════ */
+#s2 { gap:18px; padding:22px 18px; }
+
+.qtop { display:flex; align-items:flex-start; gap:10px; width:100%; }
+#qbot {
+  width:70px; height:86px; object-fit:contain; flex-shrink:0;
+  animation:wob 2.8s ease-in-out infinite;
+}
+@keyframes wob {
+  0%,100% { transform:rotate(0); }
+  25%     { transform:rotate(-5deg) translateY(-3px); }
+  75%     { transform:rotate(5deg) translateY(-3px); }
+}
+.bbl {
+  background:#fff; border-radius:16px 16px 16px 4px;
+  padding:12px 14px; flex:1;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+  color:#1565E8; font-size:13px; font-weight:900; line-height:1.3;
+}
+.qbox {
+  width:100%; background:rgba(255,255,255,.14);
+  border-radius:16px; border:2px solid rgba(255,255,255,.3);
+  padding:16px 10px; text-align:center;
+}
+#qtext {
+  color:#fff; font-size:40px; font-weight:900;
+  letter-spacing:1.5px; text-shadow:0 2px 6px rgba(0,0,0,.22);
+}
+#agrid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; width:100%; }
+.ab {
+  background:#FFC93C; color:#0D47A1;
+  font-size:26px; font-weight:900;
+  border:none; border-radius:14px; padding:14px 0; cursor:pointer;
+  box-shadow:0 4px 0 #b8820a, 0 6px 14px rgba(0,0,0,.22);
+  font-family:inherit; transition:transform .1s;
+  -webkit-tap-highlight-color:transparent;
+}
+.ab:active { transform:translateY(3px); box-shadow:0 1px 0 #b8820a; }
+.ab.ok  { background:#43A047; box-shadow:0 4px 0 #2E7D32; color:#fff; pointer-events:none; }
+.ab.bad { background:#E53935; box-shadow:0 4px 0 #B71C1C; color:#fff; animation:shk .35s ease; }
+@keyframes shk {
+  0%,100% { transform:translateX(0); }
+  25%,75% { transform:translateX(-7px); }
+  50%     { transform:translateX(7px); }
+}
+#fb {
+  font-size:15px; font-weight:900; color:#FFC93C;
+  text-align:center; min-height:22px;
+  text-shadow:0 1px 4px rgba(0,0,0,.3);
+}
+
+/* confetti */
+.cnf {
+  position:absolute; pointer-events:none; opacity:0; border-radius:2px;
+  animation:cfall .85s ease-out forwards;
+}
+@keyframes cfall {
+  0%   { opacity:1; transform:translate(0,0) rotate(0deg) scale(1); }
+  100% { opacity:0; transform:translate(var(--dx),var(--dy)) rotate(var(--dr)) scale(.3); }
+}
+
+/* ════════════════════════════════
+   SCENE 3 — CTA FINAL
+════════════════════════════════ */
+#s3 { gap:12px; padding:24px 20px; }
+
+#ctaLogo { width:72px; height:72px; object-fit:contain; }
+#ctaBrand {
+  color:#fff; font-size:30px; font-weight:900;
+  text-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+#ctaMas {
+  width:128px; height:128px; object-fit:contain;
+  animation:mbc 1.9s ease-in-out infinite;
+}
+@keyframes mbc {
+  0%,100% { transform:translateY(0); }
+  50%     { transform:translateY(-9px); }
+}
+#ctaTag {
+  color:rgba(255,255,255,.9); font-size:13px; font-weight:700;
+  text-align:center; line-height:1.5;
+}
+#ctaBtn {
+  display:block; width:100%; background:#FFC93C; color:#0D47A1;
+  font-size:19px; font-weight:900; text-align:center;
+  border:none; border-radius:28px; padding:15px 0; cursor:pointer;
+  box-shadow:0 4px 0 #b8820a, 0 6px 20px rgba(0,0,0,.25);
+  animation:cpop 1.2s ease-in-out infinite;
+  font-family:inherit; text-transform:uppercase; letter-spacing:.3px;
+  -webkit-tap-highlight-color:transparent;
+}
+@keyframes cpop {
+  0%,100% { transform:scale(1); }
+  50%     { transform:scale(1.04); }
+}
+#ctaSub { color:rgba(255,255,255,.55); font-size:10.5px; text-align:center; }
+</style>
+<script src="https://tpc.googlesyndication.com/pagead/gadgets/html5/api/exitapi.js"></script>
+</head>
+<body>
+<div id="ad">
+
+  <!-- BG deco -->
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="msym s1">+</div>
+  <div class="msym s2">&#247;</div>
+  <div class="msym s3">&#215;</div>
+  <div class="msym s4">=</div>
+
+  <!-- SKIP (visible après 5 s) -->
+  <div id="skip" onclick="goS3()">Passer &#10005;</div>
+
+  <!-- ══ SCENE 0 : INTRO ══ -->
+  <div class="sc on" id="s0">
+    <img id="s0Logo" src="assets/logoo.png" alt="">
+    <div id="s0Brand">MathsCool</div>
+    <div id="s0Stars">&#11088; &#10024; &#11088;</div>
+    <div id="s0Sub">L&rsquo;aventure des maths<br>commence ici&nbsp;!</div>
+  </div>
+
+  <!-- ══ SCENE 1 : CAROUSEL DE FEATURES ══ -->
+  <div class="sc" id="s1">
+    <div id="cvp">
+      <div id="ctrk">
+        <div class="csl">
+          <img src="assets/1.png" alt="" loading="lazy">
+          <div class="cap">Apprends les maths en jouant</div>
+        </div>
+        <div class="csl">
+          <img src="assets/4.png" alt="" loading="lazy">
+          <div class="cap">Des maths concrètes &amp; interactives</div>
+        </div>
+        <div class="csl">
+          <img src="assets/5.png" alt="" loading="lazy">
+          <div class="cap">Un super prof IA&nbsp;!</div>
+        </div>
+      </div>
+    </div>
+    <div id="cdots">
+      <div class="dot on"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <!-- ══ SCENE 2 : MINI QUIZ ══ -->
+  <div class="sc" id="s2">
+    <div class="qtop">
+      <img id="qbot" src="assets/logoo.png" alt="" loading="lazy">
+      <div class="bbl">Peux-tu r&eacute;soudre &ccedil;a&nbsp;?</div>
+    </div>
+    <div class="qbox"><div id="qtext">?</div></div>
+    <div id="agrid"></div>
+    <div id="fb"></div>
+  </div>
+
+  <!-- ══ SCENE 3 : CTA ══ -->
+  <div class="sc" id="s3">
+    <img id="ctaLogo" src="assets/logoo.png" alt="" loading="lazy">
+    <div id="ctaBrand">MathsCool</div>
+    <img id="ctaMas" src="assets/mas.png" alt="" loading="lazy">
+    <div id="ctaTag">
+      Rejoins des milliers d&rsquo;enfants<br>
+      qui apprennent les maths<br>
+      en s&rsquo;amusant&nbsp;!
+    </div>
+    <button id="ctaBtn" onclick="doClick()">&#9654; Jouer Maintenant</button>
+    <div id="ctaSub">Gratuit &middot; Google Play</div>
+  </div>
+
+</div><!-- #ad -->
+
+<script>
+var clickTag = "https://play.google.com/store/apps/details?id=com.heyhappy.mathscool";
+function doClick() {
+  if (typeof ExitApi !== 'undefined') { ExitApi.exit(); }
+  else { window.open(clickTag, '_blank'); }
+}
+
+function show(id) { document.getElementById(id).classList.add('on'); }
+function hide(id) { document.getElementById(id).classList.remove('on'); }
+function goS3()   { hide('s2'); show('s3'); }
+
+// Passer visible après 5 s
+setTimeout(function() {
+  document.getElementById('skip').classList.add('show');
+}, 5000);
+
+// Scène 0 → Scène 1 après 1.9 s
+setTimeout(function() {
+  hide('s0');
+  show('s1');
+  startCarousel();
+}, 1900);
+
+// ─── Carousel ────────────────────────────
+var ci = 0;
+var dots = document.querySelectorAll('.dot');
+var ctimer;
+
+function startCarousel() {
+  ci = 0;
+  syncCarousel();
+  ctimer = setInterval(function() {
+    ci++;
+    if (ci >= 3) {
+      clearInterval(ctimer);
+      hide('s1');
+      show('s2');
+      startQuiz();
+      return;
+    }
+    syncCarousel();
+  }, 1500);
+}
+
+function syncCarousel() {
+  document.getElementById('ctrk').style.transform = 'translateX(-' + (ci * 320) + 'px)';
+  dots.forEach(function(d, i) { d.classList.toggle('on', i === ci); });
+}
+
+// ─── Quiz ────────────────────────────────
+var QS = [
+  { q: '7 + 5 = ?',      opts: [10, 12, 14], ans: 12 },
+  { q: '9 \u2212 4 = ?',  opts: [4, 5, 6],   ans: 5  },
+  { q: '3 \xd7 4 = ?',    opts: [10, 12, 14], ans: 12 },
+  { q: '6 + 7 = ?',      opts: [12, 13, 14], ans: 13 },
+  { q: '15 \u2212 8 = ?', opts: [6, 7, 8],   ans: 7  }
+];
+
+var tries = 0, locked = false, qtimer;
+
+function shuffle(a) { return a.slice().sort(function() { return Math.random() - .5; }); }
+
+function startQuiz() {
+  tries = 0; locked = false;
+  document.getElementById('fb').textContent = '';
+  var q = QS[Math.floor(Math.random() * QS.length)];
+  document.getElementById('qtext').textContent = q.q;
+  var grid = document.getElementById('agrid');
+  grid.innerHTML = '';
+  shuffle(q.opts).forEach(function(v) {
+    var b = document.createElement('button');
+    b.className = 'ab';
+    b.textContent = v;
+    b.addEventListener('click', function() { pick(b, v, q.ans); });
+    grid.appendChild(b);
+  });
+  // Avance auto si pas d'interaction pendant 6 s
+  qtimer = setTimeout(function() { if (!locked) goS3(); }, 6000);
+}
+
+function pick(btn, val, ans) {
+  if (locked) return;
+  clearTimeout(qtimer);
+  var fb = document.getElementById('fb');
+  if (val === ans) {
+    locked = true;
+    btn.classList.add('ok');
+    document.querySelectorAll('.ab').forEach(function(b) { b.style.pointerEvents = 'none'; });
+    fb.textContent = '\ud83c\udf89 Excellent\u00a0! Bravo\u00a0!';
+    spawnConfetti();
+    setTimeout(goS3, 1400);
+  } else {
+    tries++;
+    btn.classList.add('bad');
+    if (tries >= 2) {
+      locked = true;
+      document.querySelectorAll('.ab').forEach(function(b) {
+        b.style.pointerEvents = 'none';
+        if (+b.textContent === ans) b.classList.add('ok');
+      });
+      fb.textContent = 'R\u00e9essaie dans l\u2019app\u00a0!';
+      setTimeout(goS3, 1700);
+    } else {
+      fb.textContent = 'R\u00e9essaie\u00a0!';
+      setTimeout(function() { btn.classList.remove('bad'); fb.textContent = ''; }, 700);
+    }
+  }
+}
+
+// ─── Confetti ────────────────────────────
+function spawnConfetti() {
+  var cols = ['#FFC93C', '#FF6B6B', '#4CAF50', '#64B5F6', '#CE93D8', '#fff', '#FFEB3B'];
+  var ad = document.getElementById('ad');
+  for (var i = 0; i < 34; i++) {
+    (function(i) {
+      setTimeout(function() {
+        var el = document.createElement('div');
+        el.className = 'cnf';
+        var size = 7 + Math.random() * 9;
+        el.style.cssText = [
+          'background:' + cols[i % cols.length],
+          'left:' + (50 + Math.random() * 220) + 'px',
+          'top:' + (80 + Math.random() * 200) + 'px',
+          'width:' + size + 'px',
+          'height:' + size + 'px',
+          'border-radius:' + (Math.random() > .5 ? '50%' : '3px')
+        ].join(';');
+        el.style.setProperty('--dx', ((Math.random() - .5) * 200) + 'px');
+        el.style.setProperty('--dy', (50 + Math.random() * 140) + 'px');
+        el.style.setProperty('--dr', ((Math.random() * 720) - 360) + 'deg');
+        ad.appendChild(el);
+        setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 900);
+      }, i * 32);
+    })(i);
+  }
+}
+</script>
+</body>
+</html>

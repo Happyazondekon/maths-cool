@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="ad.size" content="width=320,height=480">
+<title>MathsCool Countdown 320x480 FR</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:320px; height:480px; overflow:hidden;
+  font-family:'Arial Rounded MT Bold','Trebuchet MS',Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent; user-select:none;
+}
+#ad {
+  position:relative; width:320px; height:480px; overflow:hidden;
+  background:linear-gradient(155deg, #071220 0%, #0D2B6B 55%, #1A6B9A 100%);
+}
+
+/* stars */
+.star {
+  position:absolute; background:#fff; border-radius:50%; pointer-events:none;
+  animation:twk 2s ease-in-out infinite;
+}
+@keyframes twk { 0%,100%{opacity:.15;transform:scale(1)} 50%{opacity:.9;transform:scale(1.4)} }
+
+/* skip */
+#skip {
+  position:absolute; top:10px; right:10px; z-index:200;
+  background:rgba(0,0,0,.42); color:rgba(255,255,255,.9);
+  font-size:10.5px; font-weight:700; padding:5px 11px;
+  border-radius:16px; cursor:pointer; opacity:0; pointer-events:none;
+  transition:opacity .4s; border:1px solid rgba(255,255,255,.2);
+}
+#skip.show { opacity:1; pointer-events:all; }
+
+/* scenes */
+.sc {
+  position:absolute; top:0; left:0; width:320px; height:480px;
+  opacity:0; pointer-events:none; transition:opacity .5s;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.sc.on { opacity:1; pointer-events:all; }
+
+/* ══ S0 INTRO ══ */
+#s0 { gap:14px; padding:30px 24px; }
+#s0Logo {
+  width:92px; height:92px; object-fit:contain;
+  animation:bnc .85s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes bnc {
+  0%   { transform:translateY(60px) scale(.4); opacity:0; }
+  55%  { transform:translateY(-14px) scale(1.1); opacity:1; }
+  75%  { transform:translateY(6px) scale(.97); }
+  100% { transform:translateY(0) scale(1); opacity:1; }
+}
+#s0Brand { color:#fff; font-size:36px; font-weight:900; text-shadow:0 2px 10px rgba(0,0,0,.5); animation:fup .6s .35s both; }
+#s0Tag   { color:#FFC93C; font-size:15px; font-weight:900; animation:fup .6s .5s both; }
+#s0Sub   { color:rgba(255,255,255,.82); font-size:13px; font-weight:700; text-align:center; line-height:1.5; animation:fup .6s .65s both; }
+@keyframes fup { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* ══ S1 FEATURE ══ */
+#s1 { justify-content:flex-start; }
+#s1Img { width:320px; height:330px; object-fit:contain; background:rgba(255,255,255,.04); flex-shrink:0; }
+#s1Cap { padding:16px 20px 12px; text-align:center; }
+#s1Cap .t1 { color:#FFC93C; font-size:14.5px; font-weight:900; }
+#s1Cap .t2 { color:rgba(255,255,255,.78); font-size:12px; font-weight:700; margin-top:5px; }
+
+/* ══ S2 COUNTDOWN QUIZ ══ */
+#s2 { gap:14px; padding:18px 18px; }
+.topRow { display:flex; align-items:center; gap:10px; width:100%; }
+#qRobot { width:56px; height:70px; object-fit:contain; flex-shrink:0; animation:wob 2.5s ease-in-out infinite; }
+@keyframes wob { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-5deg) translateY(-3px)} 75%{transform:rotate(5deg) translateY(-3px)} }
+.challengeLabel { flex:1; }
+.challengeLabel .c1 { color:#FFC93C; font-size:13px; font-weight:900; }
+.challengeLabel .c2 { color:rgba(255,255,255,.8); font-size:11px; font-weight:700; margin-top:2px; }
+
+.timerWrap { position:relative; width:72px; height:72px; flex-shrink:0; }
+.timerSvg { width:72px; height:72px; transform:rotate(-90deg); }
+.tBg  { fill:none; stroke:rgba(255,255,255,.12); stroke-width:6; }
+.tArc { fill:none; stroke:#FFC93C; stroke-width:6; stroke-linecap:round; stroke-dasharray:197.9; stroke-dashoffset:0; transition:stroke-dashoffset .1s linear, stroke .3s; }
+#tNum { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#fff; font-size:22px; font-weight:900; }
+
+.qbox { width:100%; background:rgba(255,255,255,.13); border-radius:16px; border:2px solid rgba(255,255,255,.25); padding:14px 10px; text-align:center; }
+#qtext { color:#fff; font-size:40px; font-weight:900; letter-spacing:2px; text-shadow:0 2px 6px rgba(0,0,0,.3); }
+
+#agrid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; width:100%; }
+.ab {
+  background:#FFC93C; color:#0D47A1; font-size:24px; font-weight:900;
+  border:none; border-radius:14px; padding:13px 0; cursor:pointer;
+  box-shadow:0 4px 0 #b8820a, 0 5px 12px rgba(0,0,0,.22);
+  font-family:inherit; -webkit-tap-highlight-color:transparent;
+}
+.ab:active { transform:translateY(3px); box-shadow:0 1px 0 #b8820a; }
+.ab.ok  { background:#43A047; box-shadow:0 4px 0 #2E7D32; color:#fff; pointer-events:none; }
+.ab.bad { background:#E53935; box-shadow:0 4px 0 #B71C1C; color:#fff; animation:shk .35s ease; }
+@keyframes shk { 0%,100%{transform:translateX(0)} 25%,75%{transform:translateX(-7px)} 50%{transform:translateX(7px)} }
+
+#fb { font-size:14px; font-weight:900; color:#FFC93C; text-align:center; min-height:20px; text-shadow:0 1px 4px rgba(0,0,0,.3); }
+
+.cnf { position:absolute; pointer-events:none; opacity:0; animation:cfall .85s ease-out forwards; }
+@keyframes cfall { 0%{opacity:1;transform:translate(0,0) rotate(0) scale(1)} 100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--dr)) scale(.3)} }
+
+/* ══ S3 CTA ══ */
+#s3 { gap:12px; padding:24px 20px; }
+#ctaLogo { width:72px; height:72px; object-fit:contain; }
+#ctaBrand { color:#fff; font-size:30px; font-weight:900; text-shadow:0 2px 8px rgba(0,0,0,.4); }
+#ctaMas { width:126px; height:126px; object-fit:contain; animation:mbc 1.9s ease-in-out infinite; }
+@keyframes mbc { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+#ctaTag { color:rgba(255,255,255,.9); font-size:13px; font-weight:700; text-align:center; line-height:1.5; }
+#ctaBtn {
+  display:block; width:100%; background:#FFC93C; color:#0D47A1;
+  font-size:18px; font-weight:900; text-align:center; border:none;
+  border-radius:28px; padding:15px 0; cursor:pointer;
+  box-shadow:0 4px 0 #b8820a, 0 6px 20px rgba(0,0,0,.25);
+  animation:cpop 1.2s ease-in-out infinite;
+  font-family:inherit; text-transform:uppercase; -webkit-tap-highlight-color:transparent;
+}
+@keyframes cpop { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+#ctaSub { color:rgba(255,255,255,.55); font-size:10.5px; text-align:center; }
+</style>
+</head>
+<body>
+<div id="ad">
+
+  <div id="skip" onclick="goS3()">Passer &#10005;</div>
+
+  <!-- ══ SCENE 0 : INTRO ══ -->
+  <div class="sc on" id="s0">
+    <img id="s0Logo" src="assets/logoo.png" alt="" loading="lazy">
+    <div id="s0Brand">MathsCool</div>
+    <div id="s0Tag">&#9200; Bats le chrono&nbsp;!</div>
+    <div id="s0Sub">R&eacute;ponds au d&eacute;fi math<br>avant que le temps ne s&rsquo;&eacute;coule&nbsp;!</div>
+  </div>
+
+  <!-- ══ SCENE 1 : FEATURE TEASER ══ -->
+  <div class="sc" id="s1">
+    <img id="s1Img" src="assets/3.png" alt="" loading="lazy">
+    <div id="s1Cap">
+      <div class="t1">Explore les qu&ecirc;tes &amp; aventures&nbsp;!</div>
+      <div class="t2">D&eacute;bloques de nouveaux mondes, niveau par niveau.</div>
+    </div>
+  </div>
+
+  <!-- ══ SCENE 2 : COUNTDOWN QUIZ ══ -->
+  <div class="sc" id="s2">
+    <div class="topRow">
+      <img id="qRobot" src="assets/logoo.png" alt="" loading="lazy">
+      <div class="challengeLabel">
+        <div class="c1">&#9200; D&eacute;fi&nbsp;!</div>
+        <div class="c2">R&eacute;ponds avant<br>la fin du compte &agrave; rebours&nbsp;!</div>
+      </div>
+      <div class="timerWrap">
+        <svg class="timerSvg" viewBox="0 0 72 72">
+          <circle class="tBg"  cx="36" cy="36" r="31.5"/>
+          <circle class="tArc" id="tArc" cx="36" cy="36" r="31.5"/>
+        </svg>
+        <div id="tNum">10</div>
+      </div>
+    </div>
+    <div class="qbox"><div id="qtext">?</div></div>
+    <div id="agrid"></div>
+    <div id="fb"></div>
+  </div>
+
+  <!-- ══ SCENE 3 : CTA ══ -->
+  <div class="sc" id="s3">
+    <img id="ctaLogo" src="assets/logoo.png" alt="" loading="lazy">
+    <div id="ctaBrand">MathsCool</div>
+    <img id="ctaMas" src="assets/mas.png" alt="" loading="lazy">
+    <div id="ctaTag">
+      Explore les qu&ecirc;tes, gagne des r&eacute;compenses<br>
+      &amp; ma&icirc;trise les maths&nbsp;!
+    </div>
+    <button id="ctaBtn" onclick="doClick()">&#9654; Commence l&rsquo;Aventure</button>
+    <div id="ctaSub">Gratuit &middot; Google Play</div>
+  </div>
+
+</div><!-- #ad -->
+
+<script src="https://tpc.googlesyndication.com/pagead/gadgets/html5/api/exitapi.js"></script>
+<script>
+var clickTag = "https://play.google.com/store/apps/details?id=com.heyhappy.mathscool";
+function doClick() {
+  if (typeof ExitApi !== 'undefined') { ExitApi.exit(); }
+  else { window.open(clickTag, '_blank'); }
+}
+
+function show(id) { document.getElementById(id).classList.add('on'); }
+function hide(id) { document.getElementById(id).classList.remove('on'); }
+
+var timers = [];
+function T(fn, ms) { var t = setTimeout(fn, ms); timers.push(t); return t; }
+function clearAll() { timers.forEach(clearTimeout); timers = []; }
+
+function goS3() {
+  clearAll();
+  if (cdInterval) { clearInterval(cdInterval); cdInterval = null; }
+  hide('s1'); hide('s2');
+  show('s3');
+}
+
+T(function() { document.getElementById('skip').classList.add('show'); }, 5000);
+
+(function() {
+  var ad = document.getElementById('ad');
+  for (var i = 0; i < 22; i++) {
+    var s = document.createElement('div'); s.className = 'star';
+    var sz = 1 + Math.random() * 2.5;
+    s.style.cssText = 'width:' + sz + 'px;height:' + sz + 'px;top:' + (Math.random() * 100) + '%;left:' + (Math.random() * 100) + '%;animation-delay:' + (Math.random() * 2) + 's;animation-duration:' + (1.5 + Math.random() * 2) + 's';
+    ad.appendChild(s);
+  }
+})();
+
+T(function() {
+  hide('s0'); show('s1');
+  T(function() { hide('s1'); show('s2'); startQuiz(); }, 1800);
+}, 1800);
+
+var QS = [
+  { q: '7 + 5 = ?',      opts: [10, 12, 14], ans: 12 },
+  { q: '9 \u2212 4 = ?',  opts: [4, 5, 6],   ans: 5  },
+  { q: '3 \xd7 4 = ?',    opts: [10, 12, 14], ans: 12 },
+  { q: '6 + 7 = ?',      opts: [12, 13, 14], ans: 13 },
+  { q: '15 \u2212 8 = ?', opts: [6, 7, 8],   ans: 7  }
+];
+
+var locked = false, cdInterval = null, timeLeft = 10;
+var circ = 2 * Math.PI * 31.5;
+function shuffle(a) { return a.slice().sort(function() { return Math.random() - .5; }); }
+
+function startQuiz() {
+  locked = false; timeLeft = 10;
+  document.getElementById('fb').textContent = '';
+  var q = QS[Math.floor(Math.random() * QS.length)];
+  document.getElementById('qtext').textContent = q.q;
+  var g = document.getElementById('agrid'); g.innerHTML = '';
+  shuffle(q.opts).forEach(function(v) {
+    var b = document.createElement('button');
+    b.className = 'ab'; b.textContent = v;
+    b.addEventListener('click', function() { pick(b, v, q.ans); });
+    g.appendChild(b);
+  });
+  updateTimer(10);
+  cdInterval = setInterval(function() {
+    timeLeft--;
+    updateTimer(timeLeft);
+    if (timeLeft <= 0) {
+      clearInterval(cdInterval); cdInterval = null;
+      if (!locked) {
+        locked = true;
+        document.querySelectorAll('.ab').forEach(function(b) { b.style.pointerEvents = 'none'; });
+        document.getElementById('fb').textContent = 'Temps \u00e9coul\u00e9\u00a0! Essaie dans l\u2019app\u00a0!';
+        T(goS3, 1500);
+      }
+    }
+  }, 1000);
+}
+
+function updateTimer(t) {
+  document.getElementById('tNum').textContent = t;
+  var arc = document.getElementById('tArc');
+  arc.style.strokeDashoffset = circ * (1 - t / 10);
+  arc.style.stroke = t > 5 ? '#FFC93C' : t > 2 ? '#FF9800' : '#F44336';
+}
+
+function pick(btn, val, ans) {
+  if (locked) return;
+  var fb = document.getElementById('fb');
+  if (val === ans) {
+    locked = true;
+    clearInterval(cdInterval); cdInterval = null;
+    btn.classList.add('ok');
+    document.querySelectorAll('.ab').forEach(function(b) { b.style.pointerEvents = 'none'; });
+    fb.textContent = '\ud83c\udf89 Correct\u00a0! Bravo\u00a0!';
+    spawnConfetti();
+    T(goS3, 1400);
+  } else {
+    btn.classList.add('bad');
+    fb.textContent = 'Faux\u00a0! Continue\u00a0!';
+    T(function() { btn.classList.remove('bad'); fb.textContent = ''; }, 700);
+  }
+}
+
+function spawnConfetti() {
+  var cols = ['#FFC93C','#FF6B6B','#4CAF50','#64B5F6','#CE93D8','#fff'];
+  var ad = document.getElementById('ad');
+  for (var i = 0; i < 30; i++) {
+    (function(i) {
+      setTimeout(function() {
+        var el = document.createElement('div'); el.className = 'cnf';
+        var sz = 7 + Math.random() * 9;
+        el.style.cssText = 'background:' + cols[i % cols.length] + ';left:' + (50 + Math.random() * 220) + 'px;top:' + (80 + Math.random() * 200) + 'px;width:' + sz + 'px;height:' + sz + 'px;border-radius:' + (Math.random() > .5 ? '50%' : '3px');
+        el.style.setProperty('--dx', ((Math.random() - .5) * 200) + 'px');
+        el.style.setProperty('--dy', (50 + Math.random() * 140) + 'px');
+        el.style.setProperty('--dr', ((Math.random() * 720) - 360) + 'deg');
+        ad.appendChild(el);
+        setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 900);
+      }, i * 35);
+    })(i);
+  }
+}
+</script>
+</body>
+</html>
